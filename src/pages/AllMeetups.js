@@ -28,6 +28,7 @@ const AllMeetupsPage = () => {
   const [loadedMeetups, setLoadedMeetups] = useState([]);
 
   useEffect(() => {
+    setIsLoading(true);
     fetch(
       'https://react-meetup-app-6c0a6-default-rtdb.firebaseio.com/meetups.json'
     )
@@ -35,8 +36,19 @@ const AllMeetupsPage = () => {
         response.json();
       })
       .then((data) => {
+        const meetups = [];
+
+        for (const key in data) {
+          const meetup = {
+            id: key,
+            ...data[key],
+          };
+          console.log('hi from within the loop');
+          meetups.push(meetup);
+        }
+        console.log(meetups, 'hi from outside the loop');
         setIsLoading(false);
-        setLoadedMeetups(data);
+        setLoadedMeetups(meetups);
       });
   }, []);
 
