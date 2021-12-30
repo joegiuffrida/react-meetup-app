@@ -33,7 +33,7 @@ const AllMeetupsPage = () => {
       'https://react-meetup-app-6c0a6-default-rtdb.firebaseio.com/meetups.json'
     )
       .then((response) => {
-        response.json();
+        return response.json();
       })
       .then((data) => {
         const meetups = [];
